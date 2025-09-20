@@ -2,10 +2,10 @@ version: "3.9"
 
 services:
   web:
-    image: php:8.2-apache
+    build: .
     container_name: php_web
     volumes:
-      - ../application MVC/:/var/www/html/
+      - .:/var/www/html/
     ports:
       - "8080:80"
     depends_on:
@@ -14,7 +14,6 @@ services:
   db:
     image: mysql:8.0
     container_name: mysql_db
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydb
@@ -32,8 +31,6 @@ services:
       - db
     environment:
       PMA_HOST: db
-      PMA_USER: user
-      PMA_PASSWORD: userpassword
     ports:
       - "8081:80"
 

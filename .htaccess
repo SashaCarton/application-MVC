@@ -1,0 +1,17 @@
+RewriteEngine On
+
+# Redirection pour la page d'accueil
+RewriteRule ^home/?$ index.php?action=Home/index [L,QSA]
+
+# Redirection pour les actions spécifiques de Home
+RewriteRule ^home/([a-zA-Z0-9_-]+)/?$ index.php?action=Home/$1 [L,QSA]
+
+# Redirection générale pour contrôleur sans action (utilise 'index' par défaut)
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?action=$1 [L,QSA]
+
+# Redirection générale pour contrôleur/action
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?action=$1/$2 [L,QSA]
+
+# Redirection pour contrôleur/action/paramètre
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?action=$1/$2/$3 [L,QSA]
+

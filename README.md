@@ -1,7 +1,7 @@
 # Application MVC PHP
 
 ## Prérequis
-- Docker et Docker Compose installés
+- Docker installés
 - (Optionnel) XAMPP ou un environnement Apache/PHP/MySQL local
 
 ## Lancement avec Docker
