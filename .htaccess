@@ -1,7 +1,29 @@
 RewriteEngine On
 
+# Routes spécifiques pour l'authentification
+RewriteRule ^signin/?$ index.php?action=user/signin [L,QSA]
+RewriteRule ^login/?$ index.php?action=auth/login [L,QSA]
+RewriteRule ^logout/?$ index.php?action=auth/logout [L,QSA]
+RewriteRule ^dashboard/?$ index.php?action=dashboard [L,QSA]
+RewriteRule ^dashboard/logout/?$ index.php?action=dashboard/logout [L,QSA]
+
+# Routes spécifiques pour les médias
+RewriteRule ^medias/?$ index.php?action=media [L,QSA]
+RewriteRule ^medias/search/?$ index.php?action=media/search [L,QSA]
+RewriteRule ^medias/borrow/?$ index.php?action=media/borrow [L,QSA]
+RewriteRule ^medias/return/?$ index.php?action=media/return [L,QSA]
+RewriteRule ^medias/myBorrows/?$ index.php?action=media/myBorrows [L,QSA]
+
+# Routes d'administration
+RewriteRule ^admin/?$ index.php?action=admin [L,QSA]
+RewriteRule ^admin/add/?$ index.php?action=admin/add [L,QSA]
+RewriteRule ^admin/create/?$ index.php?action=admin/create [L,QSA]
+RewriteRule ^admin/edit/([0-9]+)/?$ index.php?action=admin/edit/$1 [L,QSA]
+RewriteRule ^admin/update/([0-9]+)/?$ index.php?action=admin/update/$1 [L,QSA]
+RewriteRule ^admin/delete/([0-9]+)/?$ index.php?action=admin/delete/$1 [L,QSA]
+
 # Redirection pour la page d'accueil
-RewriteRule ^home/?$ index.php?action=Home/index [L,QSA]
+RewriteRule ^home/?$ index.php?action=Home/index [L,QSA]    
 
 # Redirection pour les actions spécifiques de Home
 RewriteRule ^home/([a-zA-Z0-9_-]+)/?$ index.php?action=Home/$1 [L,QSA]

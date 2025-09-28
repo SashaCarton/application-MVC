@@ -40,6 +40,12 @@
             align-items: center;
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 28px;
@@ -269,7 +275,14 @@
     <header class="header">
         <nav class="nav">
             <a href="#" class="logo">MÉDIATHÈQUE</a>
-            <a href="/login" class="login-btn">Se Connecter</a>
+            <div class="nav-actions">
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <span class="user-info">Bienvenue, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                    <a href="/dashboard" class="login-btn">Dashboard</a>
+                <?php else: ?>
+                    <a href="/login" class="login-btn">Se Connecter</a>
+                <?php endif; ?>
+            </div>
         </nav>
     </header>
 

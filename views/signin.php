@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion | MÉDIATHÈQUE</title>
+    <title>Inscription | MÉDIATHÈQUE</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;700;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
@@ -22,6 +22,56 @@
             color: #fff;
             height: 100vh;
             overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .nav-link {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .nav-link:hover {
+            background: #fff;
+            color: #000;
         }
 
         /* Main Container */
@@ -103,102 +153,65 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
-            z-index: 1;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.02) 100%);
         }
 
-        /* Header Navigation */
-        .header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 50px;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            height: 80px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .nav-link {
-            padding: 12px 30px;
-            background: transparent;
-            border: 2px solid #fff;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-size: 12px;
-        }
-
-        .nav-link:hover {
-            background: #fff;
-            color: #000;
-            transform: translateY(-2px);
-        }
-
-        /* Login Container */
-        .login-container {
-            max-width: 400px;
+        .signup-container {
             width: 100%;
-            padding: 0;
-            background: transparent;
-            text-align: center;
+            max-width: 400px;
+            padding: 40px;
             position: relative;
             z-index: 2;
         }
 
-        .login-title {
+        .signup-title {
             font-family: 'Playfair Display', serif;
-            font-size: 42px;
+            font-size: 3rem;
             font-weight: 300;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             letter-spacing: 2px;
+            text-align: center;
         }
 
-        .login-subtitle {
-            font-size: 14px;
+        .signup-subtitle {
+            font-size: 16px;
             color: #aaa;
-            margin-bottom: 50px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
             font-weight: 300;
         }
 
-        /* Form Styles */
-        .login-form {
-            text-align: left;
+        /* Error Message */
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #dc3545;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 0;
+            font-size: 14px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        /* Form Styling */
+        .signup-form {
+            width: 100%;
         }
 
         .form-group {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         .form-label {
             display: block;
+            margin-bottom: 8px;
             font-size: 12px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 10px;
             color: #ccc;
         }
 
@@ -210,7 +223,6 @@
             border-bottom: 1px solid #333;
             color: #fff;
             font-size: 16px;
-            font-family: 'Inter', sans-serif;
             transition: all 0.3s ease;
             outline: none;
         }
@@ -224,133 +236,78 @@
             font-weight: 300;
         }
 
-        /* Submit Button */
         .submit-btn {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             background: #fff;
             color: #000;
             border: none;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         .submit-btn:hover {
             background: #f0f0f0;
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
         }
 
         .submit-btn:active {
             transform: translateY(0);
         }
 
-        /* Error Message */
-        .error-message {
-            background: rgba(220, 53, 69, 0.1);
-            border: 1px solid rgba(220, 53, 69, 0.3);
-            color: #ff6b6b;
-            padding: 15px;
-            margin-bottom: 30px;
+        .login-link {
+            text-align: center;
+            margin-top: 30px;
             font-size: 14px;
-            text-align: center;
-            border-radius: 0;
-        }
-
-        /* Success Message */
-        .success-message {
-            background: rgba(40, 167, 69, 0.1);
-            border: 1px solid rgba(40, 167, 69, 0.3);
-            color: #28a745;
-            padding: 15px;
-            margin-bottom: 30px;
-            font-size: 14px;
-            text-align: center;
-            border-radius: 0;
-        }
-
-        /* Links */
-        .form-links {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .form-link {
             color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 300;
-            transition: all 0.3s ease;
         }
 
-        .form-link:hover {
+        .login-link a {
             color: #fff;
-        }
-
-        .form-link.create-account {
-            padding: 12px 24px;
-            border: 1px solid #333;
-            border-radius: 2px;
-            text-transform: uppercase;
-            font-size: 12px;
+            text-decoration: none;
             font-weight: 500;
             letter-spacing: 1px;
             transition: all 0.3s ease;
         }
 
-        .form-link.create-account:hover {
-            background: #fff;
-            color: #000;
-            border-color: #fff;
-            transform: translateY(-1px);
+        .login-link a:hover {
+            opacity: 0.8;
         }
 
-
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-            }
-
-            .image-section {
-                min-height: 40vh;
-                flex: none;
-            }
-
-            .form-section {
-                flex: 1;
-                padding: 20px;
-            }
-
             .header {
                 padding: 15px 20px;
             }
 
-            .form-links {
+            .main-container {
                 flex-direction: column;
-                gap: 15px;
+                height: calc(100vh - 60px);
+                margin-top: 60px;
             }
 
-            .form-link.create-account {
-                width: 100%;
-                text-align: center;
-                padding: 15px 24px;
+            .image-section {
+                height: 40%;
             }
 
-            .login-title {
-                font-size: 32px;
+            .form-section {
+                height: 60%;
+                padding: 20px;
+            }
+
+            .signup-container {
+                padding: 20px;
+            }
+
+            .signup-title {
+                font-size: 2.5rem;
             }
 
             .image-title {
@@ -363,24 +320,24 @@
         }
 
         @media (max-width: 480px) {
-            .form-section {
-                padding: 15px;
+            .signup-title {
+                font-size: 2rem;
             }
 
-            .login-container {
-                max-width: 100%;
+            .form-input {
+                padding: 15px 0;
+            }
+
+            .submit-btn {
+                padding: 18px;
             }
         }
 
-        /* Animation on load */
-        .login-container {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
+        /* Animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(30px);
             }
 
             to {
@@ -388,51 +345,62 @@
                 transform: translateY(0);
             }
         }
+
+        .signup-container {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .image-content {
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
     </style>
 </head>
 
 <body>
+    <!-- Header -->
     <header class="header">
         <nav class="nav">
             <a href="/" class="logo">MÉDIATHÈQUE</a>
-            <a href="/" class="nav-link">Retour à l'Accueil</a>
+            <a href="/login" class="nav-link">Se Connecter</a>
         </nav>
     </header>
 
+    <!-- Main Container -->
     <div class="main-container">
+        <!-- Left Image Section -->
         <div class="image-section">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=1600&fit=crop&crop=center&auto=format&q=80"
-                alt="Médiathèque" class="hero-image">
             <div class="image-overlay"></div>
+            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="Library" class="hero-image">
             <div class="image-content">
-                <h2 class="image-title">COLLECTION EXCLUSIVE</h2>
+                <h1 class="image-title">Rejoignez-Nous</h1>
                 <p class="image-subtitle">
-                    Accédez à notre univers raffiné de culture et de découvertes.
-                    Une expérience premium vous attend.
+                    Créez votre compte pour accéder à notre collection exclusive de ressources culturelles et
+                    littéraires.
                 </p>
             </div>
         </div>
 
+        <!-- Right Form Section -->
         <div class="form-section">
-            <div class="login-container">
-                <h1 class="login-title">Connexion</h1>
-                <p class="login-subtitle">Accès à la Collection</p>
+            <div class="signup-container">
+                <h1 class="signup-title">Inscription</h1>
+                <p class="signup-subtitle">Créer votre Compte</p>
 
-                <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
+                <?php if (isset($error) && !empty($error)): ?>
                     <div class="error-message">
-                        <?php echo htmlspecialchars($_SESSION['error']);
-                        unset($_SESSION['error']); ?>
+                        <?php echo htmlspecialchars($error); ?>
                     </div>
                 <?php endif; ?>
 
-                <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])): ?>
-                    <div class="success-message">
-                        <?php echo htmlspecialchars($_SESSION['success']);
-                        unset($_SESSION['success']); ?>
+                <form method="POST" action="/signin" class="signup-form">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Nom d'utilisateur</label>
+                        <input type="text" id="username" name="username" class="form-input"
+                            placeholder="Votre nom d'utilisateur" required
+                            value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
                     </div>
-                <?php endif; ?>
 
-                <form method="POST" action="" class="login-form">
                     <div class="form-group">
                         <label for="email" class="form-label">Adresse Email</label>
                         <input type="email" id="email" name="email" class="form-input" placeholder="votre@email.com"
@@ -446,44 +414,53 @@
                             required>
                     </div>
 
-                    <button type="submit" class="submit-btn">
-                        Se Connecter
-                    </button>
+                    <div class="form-group">
+                        <label for="confirm_password" class="form-label">Confirmer le Mot de Passe</label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-input"
+                            placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Créer mon Compte</button>
                 </form>
 
-                <div class="form-links">
-                    <a href="#" class="form-link">Mot de passe oublié ?</a>
-                    <a href="/signin" class="form-link create-account">Créer un compte</a>
+                <div class="login-link">
+                    <p>Déjà un compte ? <a href="/login">Se connecter</a></p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Subtle form interactions
+        // Animation au chargement
         document.addEventListener('DOMContentLoaded', function () {
+            // Animation des champs de formulaire
             const inputs = document.querySelectorAll('.form-input');
+            inputs.forEach((input, index) => {
+                input.style.animationDelay = (index * 0.1) + 's';
+                input.style.animation = 'fadeInUp 0.6s ease-out both';
+            });
 
+            // Effet de focus sur les inputs
             inputs.forEach(input => {
                 input.addEventListener('focus', function () {
-                    this.parentElement.style.transform = 'translateX(5px)';
+                    this.parentElement.style.transform = 'scale(1.02)';
+                    this.parentElement.style.transition = 'transform 0.3s ease';
                 });
 
                 input.addEventListener('blur', function () {
-                    this.parentElement.style.transform = 'translateX(0)';
+                    this.parentElement.style.transform = 'scale(1)';
                 });
             });
 
-            // Form submission animation
-            const form = document.querySelector('.login-form');
+            // Animation du bouton submit
             const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.addEventListener('mouseenter', function () {
+                this.style.boxShadow = '0 10px 25px rgba(255, 255, 255, 0.1)';
+            });
 
-            if (form && submitBtn) {
-                form.addEventListener('submit', function () {
-                    submitBtn.textContent = 'Connexion...';
-                    submitBtn.style.opacity = '0.7';
-                });
-            }
+            submitBtn.addEventListener('mouseleave', function () {
+                this.style.boxShadow = 'none';
+            });
         });
     </script>
 </body>
