@@ -1,6 +1,9 @@
 <?php
 namespace Repository;
+
 require_once __DIR__ . '/../models/db_connect.php';
+require_once __DIR__ . '/../models/User.php';
+
 use PDO;
 use PDOException;
 
@@ -11,20 +14,39 @@ class UserRepository
         return connection();
     }
 
+    /**
+     * Retourne un tableau d'instances User
+     * @return User[]
+     */
     public static function findAll(): array
     {
         $db = self::getConnection();
         $stmt = $db->query('SELECT * FROM users');
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $users = [];
+        foreach ($rows as $row) {
+            $users[] = new \User($row['id'], $row['username'], $row['email'], $row['password']);
+        }
+
+        return $users;
     }
 
-    public static function findById(int $id): ?array
+    /**
+     * Retourne une instance User ou null
+     */
+    public static function findById(int $id): ?\User
     {
         $db = self::getConnection();
         $stmt = $db->prepare('SELECT * FROM users WHERE id = :id');
         $stmt->execute(['id' => $id]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $user ?: null;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return new \User($row['id'], $row['username'], $row['email'], $row['password']);
     }
 
     public static function create(array $data): bool
@@ -63,29 +85,39 @@ class UserRepository
         return $stmt->execute(['id' => $id]);
     }
 
-    public static function getByEmail(string $email): ?array
+    public static function getByEmail(string $email): ?\User
     {
         $db = self::getConnection();
         $stmt = $db->prepare('SELECT * FROM users WHERE email = :email');
         $stmt->execute(['email' => $email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $user ?: null;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return new \User($row['id'], $row['username'], $row['email'], $row['password']);
     }
 
-    public static function findByUsername(string $username): ?array
+    public static function findByUsername(string $username): ?\User
     {
         $db = self::getConnection();
         $stmt = $db->prepare('SELECT * FROM users WHERE username = :username');
         $stmt->execute(['username' => $username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $user ?: null;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return new \User($row['id'], $row['username'], $row['email'], $row['password']);
     }
 
-    public static function authenticate(string $username, string $password): ?array
+    public static function authenticate(string $username, string $password): ?\User
     {
         $user = self::findByUsername($username);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user->getPassword())) {
             return $user;
         }
 

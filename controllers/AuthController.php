@@ -32,9 +32,9 @@ class AuthController
 
             $user = UserRepository::getByEmail($email);
 
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
+            if ($user && password_verify($password, $user->getPassword())) {
+                $_SESSION['user_id'] = $user->getId();
+                $_SESSION['username'] = $user->getUsername();
                 $_SESSION['success'] = 'Connexion réussie !';
 
                 $redirect = $_SESSION['redirect_after_login'] ?? '/medias';
@@ -70,7 +70,7 @@ class AuthController
         }
     }
 
-    public static function getCurrentUser(): ?array
+    public static function getCurrentUser()
     {
         session_start();
         if (isset($_SESSION['user_id'])) {
