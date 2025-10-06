@@ -479,21 +479,20 @@ class MediaRepository
     {
         try {
             $db = self::getConnection();
-            $stmt = $db->query("SELECT statut, COUNT(*) as count FROM medias GROUP BY statut");
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $counts = [
-                'total' => 0,
-                'disponible' => 0,
-                'emprunte' => 0
+            $stmtTotal = $db->query("SELECT COUNT(*) as total FROM medias");
+            $total = $stmtTotal->fetch(PDO::FETCH_ASSOC)['total'];
+
+            $stmtDisponible = $db->query("SELECT COUNT(*) as disponible FROM medias WHERE disponible = 1");
+            $disponible = $stmtDisponible->fetch(PDO::FETCH_ASSOC)['disponible'];
+
+            $emprunte = $total - $disponible;
+
+            return [
+                'total' => (int) $total,
+                'disponible' => (int) $disponible,
+                'emprunte' => (int) $emprunte
             ];
-
-            foreach ($results as $result) {
-                $counts[$result['statut']] = (int) $result['count'];
-                $counts['total'] += (int) $result['count'];
-            }
-
-            return $counts;
         } catch (Exception $e) {
             error_log("Erreur lors du comptage des médias : " . $e->getMessage());
             return ['total' => 0, 'disponible' => 0, 'emprunte' => 0];
@@ -517,7 +516,14 @@ class MediaRepository
             ];
 
             foreach ($results as $result) {
-                $counts[$result['type']] = (int) $result['count'];
+                $typeMapping = [
+                    'book' => 'Book',
+                    'movie' => 'Movie',
+                    'album' => 'Album'
+                ];
+
+                $className = $typeMapping[$result['type']] ?? $result['type'];
+                $counts[$className] = (int) $result['count'];
             }
 
             return $counts;
